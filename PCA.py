@@ -9,7 +9,7 @@ def pca(input_data, percent = 0.95):
     mean_each_variable = np.mean(input_data,axis = 0) # axis = 0 for row，1 for column）
     newData = input_data - mean_each_variable
 
-    covariance_matrix=np.cov(newData,rowvar=0) # rowvar = 0 indicates a row represent a sample
+    covariance_matrix=np.cov(newData,rowvar = 0) # rowvar = 0 indicates a row represent a sample
     print(covariance_matrix)
     eigen_values,eigen_vectors = np.linalg.eig(np.mat(covariance_matrix))
     print(eigen_values)
