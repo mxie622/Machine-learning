@@ -14,7 +14,7 @@ def pca(input_data, percent = 0.95):
     eigen_values,eigen_vectors = np.linalg.eig(np.mat(covariance_matrix))
     print(eigen_values)
     print(eigen_vectors)
-    n=percentage2n(eigen_values, percent)          # For getting percent, need n of eigenvalues
+    n = percentage2n(eigen_values, percent)          # For getting percent, need n of eigenvalues
 
     eigValIndice=np.argsort(eigen_values)            # Sort eigenvalues ascending
     n_eigValIndice=eigValIndice[-1:-(n+1):-1]
