@@ -1,7 +1,7 @@
 def SVD(M):
     import numpy as np
     if isinstance(M, np.matrix) or isinstance(M, np.array):
-#        M = np.mat([[3, 2, 2], [2, 3, -2]])
+
         U = np.linalg.eig(M * M.T) # U = M * M^T
 
         V = np.linalg.eig(M.T * M) # Vt = M^T * M
