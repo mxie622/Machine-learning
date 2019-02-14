@@ -1,4 +1,4 @@
-def SVD(M):
+def SVD_decomposition(M):
     import numpy as np
     if isinstance(M, np.matrix) or isinstance(M, np.array):
 
@@ -14,10 +14,13 @@ def SVD(M):
 
 import numpy as np
 
-a = SVD(M = np.mat([[3, 2, 2], [2, 3, -2]]))
+a = SVD_decomposition(M = np.mat([[3, 2, 2], [2, 3, -2]]))
 
 print(a)
 print(a[0] * a[1] * a[2])
+
+# SVD decomposition
+
 
 
 
