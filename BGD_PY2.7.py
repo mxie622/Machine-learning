@@ -26,7 +26,7 @@ x = x.values
 # print(y)
 
 
-def SGD(alpha, data):
+def BGD(alpha, data):
     data = pd.DataFrame(data)
 
     ncol = len(data.iloc[0, :]) - 1
@@ -72,5 +72,5 @@ def SGD(alpha, data):
 
     return theta0, theta1, theta2
 
-a = SGD(0.005, data = data)
+a = BGD(0.005, data = data)
 print(a)
