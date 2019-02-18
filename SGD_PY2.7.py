@@ -1,151 +1,54 @@
-#
-# import pandas as pd
-#
-# import numpy as np
-# data = [(1, 4,3, 12) , (1, 1,3, 22) ,(1,2.,3,31), (1,3.,2,12) , (1,4.,4,11),
-#      (2, 5, 3, 13) , (4, 2, 1,22) ,(5, 4, 3,17), (1, 1,2, 13) , (1, 2, 4,14)]
-# data = pd.DataFrame(data)
-# #y[i] is the output of y = theta0 * x[0] + theta1 * x[1] +theta2 * x[2]
-# #print(data.loc[0:len(data), [2, 3]])
-#
-# # print(len(data.iloc[1, :]))
-# ncol = len(data.iloc[0, :])-1
-#
-# y = data[len(data.iloc[0, :])-1]
-# x = data.iloc[0:len(data), 0:ncol]
-# y = y.values
-# x = x.values
-# # x_list = []
-# # print(type(y))
-# # print(x)
-# #
-# #
-# # print(type(x))
-#
-# # print(isinstance(data, list))
-#
-#
-# # print(isinstance(y, list))
-# # print(data[1])
-# # print(len(x))
-# #
-# # # #
-# def BGD(learning_rate, x, y):
-#
-#     error0 = 0
-#     error1 = 0
-# #    ncol = len(data.iloc[0, :]) - 1
-#
-#     # y = data[len(data.iloc[0, :]) - 1]
-#     # x = data.iloc[0:len(data), 0:ncol]
-#
-# #   print(x)
-#
-#     epsilon = 0.0001
-#     # learning rate
-#     diff = [0, 0]
-#
-#     m = len(x)
-#
-#     # init the parameters to zero
-#     theta0 = 0
-#     theta1 = 0
-#     theta2 = 0
-#     # i = 1
-#     # print(y[i] - (x[i][0] + theta1 * x[i][1] + theta2 * x[i][2]))
-#     while True:
-#
-#     # calculate the parameters
-#
-#         for i in range(m - 1):
-#             diff[0] =  y[i] - (x[i][0] + theta1 * x[i][1] + theta2 * x[i][2])
-#             theta0 = theta0 + learning_rate * diff[0] * x[i][0]
-#             theta1 = theta1 + learning_rate * diff[0] * x[i][1]
-#             theta2 = theta2 + learning_rate * diff[0] * x[i][2]
-#         for i in range(len(x)):
-#             error1 += (y[i] - (x[i][0] + theta1 * x[i][1] + theta2 * x[i][2])) ** 2 / 2
-#         if abs(error1 - error0) < epsilon:
-#             break
-#         else:
-#             error0 = error1
-#
-#
-#     return theta0, theta1, theta2, error1
-#
-# a = BGD(learning_rate=0.001, x = x, y = y)
-# print(a)
-#
-#
-#
-#
-#
-import pandas as pd
-
-import numpy as np
-data = [(1, 4,3, 12) , (1, 1,3, 22) ,(1,2.,3,31), (1,3.,2,12) , (1,4.,4,11),
-     (2, 5, 3, 13) , (4, 2, 1,22) ,(5, 4, 3,17), (1, 1,2, 13) , (1, 2, 4,14)]
-data = pd.DataFrame(data)
-#y[i] is the output of y = theta0 * x[0] + theta1 * x[1] +theta2 * x[2]
-#print(data.loc[0:len(data), [2, 3]])
-
-# print(len(data.iloc[1, :]))
-ncol = len(data.iloc[0, :])-1
-
-y = data[len(data.iloc[0, :])-1]
-y = y.values
-x = data.iloc[0:len(data), 0:ncol]
-x = x.values
-# print(type(x))
-# print(x)
-# print(type(y))
-# print(y)
+from matplotlib import pyplot as plt
+import  random
+# %matplotlib inline
 
 
-def SGD(alpha, data):
-    data = pd.DataFrame(data)
+def data():
+    x = range(10)
+    y = [(2*i+4) for i in x]
+    for i in range(10):
+        y[i] = y[i]+random.randint(0,8)-4
+    return x,y
 
-    ncol = len(data.iloc[0, :]) - 1
 
-    y = data[len(data.iloc[0, :]) - 1]
-    y = y.values
-    x = data.iloc[0:len(data), 0:ncol]
-    x = x.values
-
-    epsilon = 0.0001
-    # learning rate
-#    alpha = 0.01
-    diff = [0, 0]
-    error1 = 0
+def SGD(x,y):
     error0 = 0
+    step_size = 0.001
+    esp = 1e-6
+    #a = random.randint(0,4)
+    #b = random.randint(0,8)
+    a = 1.2
+    b = 3.5
     m = len(x)
 
-    # init the parameters to zero
-    theta0 = 0
-    theta1 = 0
-    theta2 = 0
-
+    n = 0
     while True:
+        i = random.randint(0,m-1)
 
-        # calculate the parameters
-        for i in range(m):
-            diff[0] = y[i] - (theta0 + theta1 * x[i][1] + theta2 * x[i][2])
+        sum0 = a * x[i] + b - y[i]
+        sum1 = (a * x[i] + b - y[i])*x[i]
+        error1 = (a * x[i] + b - y[i])**2
 
-            theta0 = theta0 + alpha * diff[0] * x[i][0]
-            theta1 = theta1 + alpha * diff[0] * x[i][1]
-            theta2 = theta2 + alpha * diff[0] * x[i][2]
+        a = a - sum1*step_size/m
+        b = b - sum0*step_size/m
+        print('a=%f,b=%f,error=%f'%(a,b,error1))
 
-        # calculate the cost function
-        error1 = 0
-        for lp in range(len(x)):
-            error1 += (y[i] - (theta0 + theta1 * x[i][1] + theta2 * x[i][2])) ** 2 / 2
-
-        if abs(error1 - error0) < epsilon:
+        if abs(error1-error0)<esp:  
             break
-        else:
-            error0 = error1
-            #    print ' theta0 : %f, theta1 : %f, theta2 : %f, error1 : %f'%(theta0,theta1,theta2,error1)
+        error0 = error1
+        n = n+1
+        if n%20==0:                
+                print('ITERATE%d'%n)
+        if (n>500):
+            break
+    return a,b
+if __name__ == '__main__':
+    x,y = data()
+    a,b = SGD(x,y)
+    X = range(10)
+    Y = [(a*i+b) for i in X]
 
-    return theta0, theta1, theta2
+    plt.scatter(x,y,color='red')
+    plt.plot(X,Y)
+    plt.show()
 
-a = SGD(0.005, data = data)
-print(a)
