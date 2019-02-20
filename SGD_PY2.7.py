@@ -37,7 +37,7 @@ def SGD(x,y):
             break
         error0 = error1
         n = n+1
-        if n%20==0:                
+        if n % 20==0:
                 print('ITERATE%d'%n)
         if (n>500):
             break
