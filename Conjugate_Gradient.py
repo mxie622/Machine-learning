@@ -38,9 +38,9 @@ def CG(A, b, n):
 
     return x
 
-a = CG(A=A, b = b, n = n)
+ans = CG(A=A, b = b, n = n)
 
-print(a)
+print(ans)
 
 
 
