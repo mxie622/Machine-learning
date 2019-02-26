@@ -1,5 +1,3 @@
-# Gauss-seidel
-
 # Ax = b
 from numpy.linalg import *
 from numpy import *
@@ -29,24 +27,25 @@ def Gauss_Seidel(A, b, n, err):
     else:
         L = tril(A)
         U = triu(A, k = 1)
-        x0 = b # initialized
+        x = b # initialized
 
         T = -dot(inv(L), U)
         C = dot(inv(L), b)
-        x1 = dot(T, x0) + C
+        x = dot(T, x) + C
         i = 0
-        x = array([[1], [1]])
+
         last = x
 
-        while err**2 > 0.0001:
-            x = dot(T, x) + C
+        while True:
+            x = dot(T, last) + C
             err = max(x - last)
             last = x
+            print("Iteration {0}: {1}".format(i, x))
             i += 1
-            if i == n:
+            if i == n or  err**2 < 0.0001:
                 break
-        return x
+        return x,i
 
-print(Gauss_Seidel(A=A, b=b, n = 10, err = 0.001)) # Approximate answer
+print(Gauss_Seidel(A=A, b=b, n = 30, err = 0.001)) # Approximate answer
 
 print(dot(inv(A),b)) # True answer
