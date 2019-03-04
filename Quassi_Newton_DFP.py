@@ -1,13 +1,27 @@
 import numpy as np
+import random
+import inspect
+
+import sympy as sy
+
+
 
 #函数表达式
 fun = lambda x:100*(x[0]**2 - x[1]**2)**2 +(x[0] - 1)**2
+
+x, y = sy.symbols('x, y')
+F = sy.Matrix([fun])
+G = F.jacobian([x,y])
+H = G.jacobian([x,y])
+# Use the result to find the Hessian and Gradient expression
 
 #梯度向量
 gfun = lambda x:np.array([400*x[0]*(x[0]**2 - x[1]) + 2*(x[0] - 1),-200*(x[0]**2 - x[1])])
 
 #Hessian矩阵
 hess = lambda x:np.array([[1200*x[0]**2 - 400*x[1] + 2,-400*x[0]],[-400*x[0],200]])
+
+
 
 def dfp(fun,gfun,hess,x0):
     #功能：用DFP算法求解无约束问题：min fun(x)
